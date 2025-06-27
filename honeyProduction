@@ -14,3 +14,17 @@ def preprocessData(df):
     y = yearly_prod['totalprod'].values
     return X, y, yearly_prod
 
+
+def trainLinearModel(X, y):
+    """Trains a linear regression model on the data."""
+    model = LinearRegression()
+    model.fit(X, y)
+    return model
+
+
+def predictFuture(model, start_year=2013, end_year=2050):
+    """Uses the trained model to predict future production."""
+    future_years = np.array(range(start_year, end_year)).reshape(-1, 1)
+    future_predictions = model.predict(future_years)
+    return future_years, future_predictions
+
