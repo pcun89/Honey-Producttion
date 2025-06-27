@@ -40,3 +40,4 @@ def plotResults(X, y, model, future_years, future_predictions):
     plt.legend()
     plt.title("Honey Production in the U.S.")
     plt.show()
+
