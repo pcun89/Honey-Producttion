@@ -28,3 +28,15 @@ def predictFuture(model, start_year=2013, end_year=2050):
     future_predictions = model.predict(future_years)
     return future_years, future_predictions
 
+
+def plotResults(X, y, model, future_years, future_predictions):
+    """Visualizes the historical and predicted honey production."""
+    plt.scatter(X, y, label='Historical Data')
+    plt.plot(X, model.predict(X), color='red', label='Regression Line')
+    plt.plot(future_years, future_predictions, color='green',
+             linestyle='--', label='Future Prediction')
+    plt.xlabel("Year")
+    plt.ylabel("Total Production (lbs)")
+    plt.legend()
+    plt.title("Honey Production in the U.S.")
+    plt.show()
