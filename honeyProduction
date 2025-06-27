@@ -41,3 +41,14 @@ def plotResults(X, y, model, future_years, future_predictions):
     plt.title("Honey Production in the U.S.")
     plt.show()
 
+
+def main():
+    df = loadData("honeyproduction.csv")
+    X, y, yearly_prod = preprocessData(df)
+    model = trainLinearModel(X, y)
+    future_years, future_predictions = predictFuture(model)
+    plotResults(X, y, model, future_years, future_predictions)
+
+
+if __name__ == "__main__":
+    main()
