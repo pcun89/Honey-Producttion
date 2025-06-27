@@ -1,0 +1,24 @@
+import unittest
+from honey_production import loadData, preprocessData, trainLinearModel
+
+class TestHoneyProduction(unittest.TestCase):
+
+    def test_loadData(self):
+        df = loadData("honeyproduction.csv")
+        self.assertFalse(df.empty, "Dataset should not be empty")
+
+    def test_preprocessData_shapes(self):
+        df = loadData("honeyproduction.csv")
+        X, y, yearly_prod = preprocessData(df)
+        self.assertEqual(len(X), len(y), "X and y must have the same length")
+        self.assertGreater(len(yearly_prod), 0, "yearly_prod should have entries")
+
+    def test_model_prediction(self):
+        df = loadData("honeyproduction.csv")
+        X, y, _ = preprocessData(df)
+        model = trainLinearModel(X, y)
+        predictions = model.predict(X)
+        self.assertEqual(len(predictions), len(y), "Predictions should match y in length")
+
+if __name__ == '__main__':
+    unittest.main()
