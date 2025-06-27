@@ -1,0 +1,16 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+import numpy as np
+
+def loadData(filepath):
+    """Loads the honey production data from a CSV file."""
+    return pd.read_csv(filepath)
+
+def preprocessData(df):
+    """Prepares the data for linear regression."""
+    yearly_prod = df.groupby('year').totalprod.mean().reset_index()
+    X = yearly_prod['year'].values.reshape(-1, 1)
+    y = yearly_prod['totalprod'].values
+    return X, y, yearly_prod
+
